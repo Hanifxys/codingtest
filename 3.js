@@ -17,12 +17,29 @@ function createMeetingScheduler() {
     let meetings = []; // Closure to store meetings
 
     function schedule(start, end) {
-        // CODE HERE
+        for (let i = 0; i < meetings.length; i++) {
+            const [existingStart, existingEnd] = meetings[i];
+            if (start < existingEnd && end > existingStart) {
+                // New meeting overlaps with an existing meeting
+                return false;
+            }
+        }
+        meetings.push([start, end]);
+        return true;
     }
-
     function findAvailableSlots(duration, start, end) {
-        const availableSlots = [];
-        // CODE HERE
+             const availableSlots = [];
+        let prevEnd = start;
+        for (let i = 0; i < meetings.length; i++) {
+            const [meetingStart, meetingEnd] = meetings[i];
+            if (prevEnd + duration <= meetingStart) {
+                availableSlots.push([prevEnd, meetingStart]);
+            }
+            prevEnd = Math.max(prevEnd, meetingEnd);
+        }
+        if (prevEnd + duration <= end) {
+            availableSlots.push([prevEnd, end]);
+        }
         return availableSlots;
     }
 
