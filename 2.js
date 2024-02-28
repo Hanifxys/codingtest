@@ -18,7 +18,13 @@ const numbers = [1, 2, 3, 4, 5];
 const isEven = (element) => element % 2 === 0;
 
 function customFilter(array, callback) {
-    //CODE HERE
+    const filteredArray = [];
+    for (let i = 0; i < array.length; i++) {
+        if (callback(array[i], i, array)) {
+            filteredArray.push(array[i]);
+        }
+    }
+    return filteredArray;
 }
 
 const filteredNumbers = customFilter(numbers, isEven);
