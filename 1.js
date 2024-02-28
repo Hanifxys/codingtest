@@ -14,7 +14,11 @@
 
 
 function transformArray(array, transform) {    
-    // CODE HERE
+   const newArray = [];
+    for (let i = 0; i < array.length; i++) {
+        newArray.push(transform(array[i]));
+    }
+    return newArray;
 }
 
 const numbers = [1, 2, 3, 4];
